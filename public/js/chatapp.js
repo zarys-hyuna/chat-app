@@ -5,9 +5,10 @@ const $messageFormInput = $messageForm.querySelector('input')
 const $sendButton = $messageForm.querySelector('button')
 const $sendLocation = document.querySelector('#location')
 const $messages = document.querySelector('#messages')
-
-const messageTemplate = document.querySelector('#message-template').innerHTML
-const locationTemplate = document.querySelector('#location-template').innerHTML
+const messageTemplateIn = document.querySelector('#message-template-in').innerHTML
+const messageTemplateOut = document.querySelector('#message-template-out').innerHTML
+const locationTemplateIn = document.querySelector('#location-template-in').innerHTML
+const locationTemplateOut = document.querySelector('#location-template-out').innerHTML
 const sidebarTemplate = document.querySelector('#sidebar-template').innerHTML
 
 const { username, room }= Qs.parse(location.search, { ignoreQueryPrefix: true })
@@ -18,24 +19,43 @@ const { username, room }= Qs.parse(location.search, { ignoreQueryPrefix: true })
 
 socket.on('message', (message) =>{
     console.log(message)
-    const html = Mustache.render(messageTemplate, {
+    const html = Mustache.render(messageTemplateIn, {
         username: message.username,
         message: message.text,
         createdAt: moment(message.createdAt).format('h:mm a')
     })
+     const html2 = Mustache.render(messageTemplateOut, {
+        username: message.username,
+        message: message.text,
+        createdAt: moment(message.createdAt).format('h:mm a')
+    })
+    if(username.toLowerCase() == message.username){
     $messages.insertAdjacentHTML('beforeend', html)
+    }
+    else{
+    $messages.insertAdjacentHTML('beforeend', html2)
+    }
     autoscroll()
 })
 
 socket.on('locationMessage', (url) =>{
     console.log(url)
-    const html = Mustache.render(locationTemplate, {
+    const html = Mustache.render(locationTemplateIn, {
         username: url.username,
-        url: url.text,
-        createdAt:  moment(url.createdAt).format('h:mm a')
+        message: url.text,
+        createdAt: moment(url.createdAt).format('h:mm a')
     })
+     const html2 = Mustache.render(locationTemplateOut, {
+        username: url.username,
+        message: url.text,
+        createdAt: moment(url.createdAt).format('h:mm a')
+    })
+    if(username.toLowerCase() == url.username){
     $messages.insertAdjacentHTML('beforeend', html)
-
+    }
+    else{
+    $messages.insertAdjacentHTML('beforeend', html2)
+    }
     autoscroll()
 })
 
