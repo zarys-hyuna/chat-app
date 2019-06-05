@@ -18,6 +18,7 @@ body {
     line-height: 1.4;
     color: #333333;
     font-family: Helvetica, Arial, sans-serif;
+    overflow: hidden
 }
 
 h1 {
@@ -112,8 +113,10 @@ button:disabled {
 
 .chat__messages {
     flex-grow: 1;
-    padding: 24px 24px 0 24px;
+    padding: 24px 24px 0 33px;
+    position: sticky;
     overflow-y: scroll;
+    z-index: 1;
 }
 
 /* Message Styles */
@@ -127,8 +130,7 @@ button:disabled {
     padding-top: 5px;
     padding-bottom: 10px;
     padding-right: 20px;
-    border-radius: 10px;
-    margin-right: -11px;
+    border-radius: 5px;
 }
 
 .message__name {
@@ -195,28 +197,29 @@ button:disabled {
     padding: 12px 24px 0 24px;
 }
 
-/* .message:before {
+#messout:before,#locout:before{
     content: "";
     width: 0px;
     height: 0px;
     position: absolute;
-    border-left: 10px solid rgb(140, 209, 206);
-    border-right: 10px solid transparent;
-    border-top: 10px solid rgb(140, 209, 206);
-    border-bottom: 10px solid transparent;
+    border-left: 11px solid rgb(140, 209, 206);
+    border-right: 11px solid transparent;
+    border-top: 11px solid rgb(140, 209, 206);
+    border-bottom: 11px solid transparent;
     transform: rotate(90deg);
-    left:233px;
-  } */
+    margin-top:14px;
+    left:13px;
+  }
 
-  .message:before {
+   #messin:before,#locin:before{
     content: "";
     width: 0px;
     height: 0px;
     position: absolute;
-    border-left: 10px solid #79d1af;
-    border-right: 10px solid transparent;
-    border-top: 10px solid #79d1af;
-    border-bottom: 10px solid transparent;
-    margin-top:17px;
-    right:8px;
+    border-left: 11px solid #79d1af;
+    border-right: 11px solid transparent;
+    border-top: 11px solid #79d1af;
+    border-bottom: 11px solid transparent;
+    margin-top:14px;
+    right:6px;
   }
